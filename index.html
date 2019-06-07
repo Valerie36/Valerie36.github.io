@@ -85,8 +85,14 @@
      	.flex > div {
      		flex-grow: 0;
      	}
-     	.modal-lg{
-     		width: 	50%;
+     }
+
+     @media only screen and (max-width: 480px) {
+     	.flex{
+     		flex-direction: column;
+     	}
+     	.flex > div {
+     		flex-grow: 0;
      	}
      }
      ul {
@@ -166,8 +172,8 @@
 	</div>
 
 	<div class="modal fade" id="FavoriteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width: 800px;">
-			<div class="modal-content" style="width: 800px;">
+		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title">Favorite !</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -178,8 +184,8 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col"style="width: 100px" >Title</th>
-								<th scope="col" style="width: 200px;">Recipe</th>
+								<th scope="col" style="width: 100px">Title</th>
+								<th scope="col" style="width: 200px">Recipe</th>
 								<th scope="col">Instruction</th>
 								<th scope="col">Delete</th>
 							</tr>
