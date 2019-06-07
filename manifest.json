@@ -23,7 +23,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/MealDB/index.php",
+  "start_url": "/index.html",
   "background_color": "#D1D1D1",
   "theme_color": "#D1D1D1",
   "display": "standalone"
