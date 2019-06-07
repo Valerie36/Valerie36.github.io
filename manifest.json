@@ -1,0 +1,30 @@
+{
+  "short_name": "Food Recipe",
+  "name": "Food Recipe",
+  "icons": [
+    {
+      "src": "chef.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "chef.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "chef.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "chef.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/MealDB/index.php",
+  "background_color": "#D1D1D1",
+  "theme_color": "#D1D1D1",
+  "display": "standalone"
+}
