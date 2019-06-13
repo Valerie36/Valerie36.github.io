@@ -13,7 +13,121 @@
 	<!-- <script src="popper.min.js"></script> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="jquery-3.4.1.min.js"></script>
-	<script type = "text/javascript">
+	<style>
+	@media only screen and (max-width: 1240px ){
+		.flex{
+			flex-direction: row;
+		}
+		.flex > div {
+			flex-grow: 2;
+		}
+		img {
+			width: 20vw;
+		}
+	}
+	@media only screen and (max-width: 1023px){
+		.flex{
+			flex-direction: row;
+		}
+		.flex > div {
+			flex-grow: 2;
+		}
+		img {
+			width: 25vw;
+		}
+	}
+	@media only screen and (max-width: 764px){
+		.flex{
+			flex-direction: column;
+		}
+		.flex > div {
+			flex-grow: 0;
+		}
+		body{
+			font-size: 20px;
+		}
+		button {
+			width: 	100px;
+		}
+		.btn{
+			width: 	100px;
+			font-size: 	12px;
+		}
+		.btn-danger{
+			width: 40px;
+		}
+		img {
+			width: 25vw;
+		}
+	}
+
+	@media only screen and (max-width: 480px) {
+		body{
+			font-size: 12px;
+		}
+		.flex{
+			flex-direction: column;
+		}
+		.flex > div {
+			flex-grow: 0;
+		}
+		button {
+			width: 	80px;
+		}
+		.btn{
+			width: 	80px;
+			font-size: 	10px;
+		}
+		.btn-danger{
+			width: 20px;
+		}
+		img {
+			width: 20vw;
+		}
+	}
+	ul {
+		list-style-type: none;
+	}
+	.box { 
+		margin: 20px auto;
+		width: 100%;
+		max-width: 150px;
+		height: 40px; 
+		text-align: center; 
+	}
+
+	.box .container-1 input{
+		width: 100%;
+	}
+	.flex{
+		display: flex;
+		flex-direction: row;
+		align-content: center;
+		flex-flow: wrap;
+	}
+	.flex > div {
+		background-color: #f1f1f1;
+		margin: 10px;
+		width: 600px;
+		padding: 10px;
+		flex-wrap: wrap;
+	}
+	img {
+		max-width: 200vw;
+		width: 30vw;
+		height: 30vw
+	}
+	h2{
+		font-size: calc(30px+10vw);
+	}
+	button{
+		padding: 15px;
+	}
+	h3{
+		font-size: calc(1.5em + 3vw)
+	}
+</style>
+<script type = "text/javascript">
 
          //prefixes of implementation that we want to test
          window.indexedDB = window.indexedDB || window.mozIndexedDB || 
