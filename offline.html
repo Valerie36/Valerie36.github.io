@@ -2,8 +2,135 @@
 <html>
 <head>
 	<title>MealDB is Offline</title>
-</head>
-<body>
-	<h1>Its Offline</h1>
-</body>
-</html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="theme-color" content="#D1D1D1">
+	<meta name="description" content="Food Recipe">
+	<link rel="manifest" href="manifest.json">
+	<title>Meal Search</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" >
+	<script src="jquery-3.4.1.slim.min.js"></script>
+	<!-- <script src="popper.min.js"></script> -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript">
+		if ('serviceWorker' in navigator) { 
+			window.addEventListener('load', () => { 
+				navigator.serviceWorker.register('service-worker.js')
+				.then((reg) => { 
+					console.log('Service worker registered.', reg);
+				});
+			});
+		} 
+
+	</script>
+	<script type = "text/javascript">
+
+         //prefixes of implementation that we want to test
+         window.indexedDB = window.indexedDB || window.mozIndexedDB || 
+         window.webkitIndexedDB || window.msIndexedDB;
+         
+         //prefixes of window.IDB objects
+         window.IDBTransaction = window.IDBTransaction || 
+         window.webkitIDBTransaction || window.msIDBTransaction;
+         window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || 
+         window.msIDBKeyRange
+         
+         if (!window.indexedDB) {
+         	window.alert("Your browser doesn't support a stable version of IndexedDB.")
+         }
+         const employeeData = [];
+         var db;
+         var request = window.indexedDB.open("recipe", 1);
+
+         request.onerror = function(event) {
+         	console.log("error: ");
+         };
+
+         request.onsuccess = function(event) {
+         	db = request.result;
+         	console.log("success: "+ db);
+         };
+
+         request.onupgradeneeded = function(event) {
+         	var db = event.target.result;
+         	const objectStore = db.createObjectStore("recipe", {keyPath: "id" , autoIncrement: true});
+
+         	for (var i in employeeData) {
+         		objectStore.add(employeeData[i]);
+         	}
+         }
+     </script>
+ </head>
+ <body>
+ 	<nav class="navbar navbar-light bg-light justify-content-between">
+ 		<a class="navbar-brand">Recipe Search is Offline</a>
+ 		<label style="display: none" for="Search">Search</label>
+ 		<input aria-label="searchi" class="form-control mr-sm-2" type="search" id="searchFood" placeholder="Search is Disable if Offline" style="width:500px ;background-color : #d1d1d1;" disabled>
+ 		<button class="btn btn-secondary btn-lg" id="Search" onclick="search()" aria-label="search" disabled>Search !</button>
+ 		<button class="btn btn-secondary btn-lg" id="Favorite" data-toggle='modal' data-target='#FavoriteModal' onclick="favorite()" aria-label="fav">Favorite</button>
+ 	</nav>
+ 	<h1 style="text-align: center;">Its Offline</h1>
+ 	<h1 style="text-align: center;">But you can still open your Favorite</h1>
+ 	<div class="modal fade" id="FavoriteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+ 		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+ 			<div class="modal-content" style="font-size:-5vw;">
+ 				<div class="modal-header">
+ 					<h5 class="modal-title">Favorite !</h5>
+ 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 					</button>
+ 				</div>
+ 				<div class="modal-body">
+ 					<table class="table">
+ 						<thead>
+ 							<tr>
+ 								<th scope="col">Title</th>
+ 								<th scope="col">Recipe</th>
+ 								<th scope="col">Instruct</th>
+ 								<th scope="col">Del</th>
+ 							</tr>
+ 						</thead>
+ 						<tbody id="favlist" class="favlist">
+ 						</tbody>
+ 					</table>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Close</button>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<script>
+ 		function favorite(){
+ 			var Parent = document.getElementById("favlist");
+ 			while(Parent.hasChildNodes())
+ 			{
+ 				Parent.removeChild(Parent.firstChild);
+ 			}
+ 			var objectStore = db.transaction("recipe").objectStore("recipe");
+
+ 			objectStore.openCursor().onsuccess = function(event) {
+ 				var cursor = event.target.result;
+
+ 				if (cursor) {
+ 					document.getElementById("favlist").innerHTML+=" <tr><td>"+cursor.value.title+"</td><td>"+cursor.value.recipe+"</td><td>"+cursor.value.instruct+"</td><td><button id='"+cursor.key+"' class='btn btn-danger' onclick='remove(this.id)' data-dismiss='modal' id='Remove'>X</button></td></tr>"
+ 					cursor.continue();
+ 				} else {
+ 					console.log("No entry");
+ 				}
+ 			};
+ 		}
+ 		function remove(id){
+ 			console.log(id-1);
+ 			var request = db.transaction(["recipe"], "readwrite")
+ 			.objectStore("recipe")
+ 			.delete(Number(id));
+
+ 			request.onsuccess = function(event) {
+ 				alert("Item has been remove to your database.");
+ 			};
+ 		}
+ 	</script>
+ </body>
+ </html>
