@@ -9,7 +9,6 @@ self.addEventListener('install', function(event) {
 			console.log('[Service Worker] Precaching App Shell');
 			cache.addAll([
 				'/',
-				'/offline.html',
 				'/jquery-3.4.1.min.js',
 				'/jquery-3.4.1.slim.min.js',
 				'/bootstrap/js/bootstrap.min.js',
